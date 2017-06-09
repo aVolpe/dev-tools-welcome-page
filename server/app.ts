@@ -42,7 +42,7 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
 
   res.status(err.status || 500);
   res.json({
-    error: {},
+    error: err,
     message: err.message,
   });
 });
