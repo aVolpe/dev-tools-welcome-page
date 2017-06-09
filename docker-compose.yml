@@ -1,0 +1,11 @@
+
+#vim: set ft=yml sw=2 ts=2 sts=2 et tw=78
+
+version: '2'
+services:
+  db:
+    image: postgres:9.5
+    env_file: .postgres_env
+    ports:
+    - 5432:5432
+
