@@ -25,9 +25,13 @@ const server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-const db : any = DBMigrate.getInstance(true, {
-    env: 'dev'
-});
+const dbOptions = {
+    env: process.env.DB_ENV || 'dev'
+};
+
+const db : any = DBMigrate.getInstance(true, dbOptions);
+
+console.info(`DB Env is ${dbOptions.env}`)
 
 db.up(() => {
 
