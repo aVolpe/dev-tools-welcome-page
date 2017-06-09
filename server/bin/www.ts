@@ -8,6 +8,8 @@ import * as http from "http";
 import { app } from "../app";
 import { serverPort } from "../config";
 
+import * as DBMigrate from "db-migrate";
+
 /**
  * Get port from environment and store in Express.
  */
@@ -23,9 +25,19 @@ const server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
-server.on("error", onError);
-server.on("listening", onListening);
+const db : any = DBMigrate.getInstance(true, {
+    env: 'dev'
+});
+
+db.up(() => {
+
+    console.log("Finishing migrations");
+
+    server.listen(port);
+    server.on("error", onError);
+    server.on("listening", onListening);
+});
+
 
 /**
  * Normalize a port into a number, string, or false.
