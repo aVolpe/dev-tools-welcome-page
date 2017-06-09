@@ -26,7 +26,8 @@ const server = http.createServer(app);
  */
 
 const dbOptions = {
-    env: process.env.DB_ENV || 'dev'
+    env: process.env.DB_ENV || 'dev',
+    config: 'server/database.json'
 };
 
 const db : any = DBMigrate.getInstance(true, dbOptions);

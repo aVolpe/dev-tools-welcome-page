@@ -13,7 +13,8 @@
     "build": "ng build --prod --sm=false --aot=true --output-path=dist/client && npm run _server:build",
     "_server:run": "tsc -p ./server && concurrently \"tsc -w -p ./server\" \"nodemon dist/server/bin/www.js\" ",
     "_server:build": "tsc -p ./server",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build",
+    "migrate": "node node_modules/db-migrate/bin/db-migrate up --config server/database.json"
   },
   "author": "Vlado Tešanović",
   "repository": {
