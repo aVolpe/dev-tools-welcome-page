@@ -1,5 +1,4 @@
 /* Replace with your SQL commands */
-
 CREATE SEQUENCE user_id_sequence INCREMENT 1 START 1;
 CREATE TABLE "user"
 (
@@ -8,7 +7,9 @@ CREATE TABLE "user"
   name text NOT NULL,
   password text NOT NULL,
   salt text NOT NULL,
-  CONSTRAINT user_pkey PRIMARY KEY (id)
+  CONSTRAINT user_pkey PRIMARY KEY (id),
+  CONSTRAINT user_unique_email UNIQUE(email)
+
 );
 
 CREATE SEQUENCE project_id_sequence INCREMENT 1 START 1;

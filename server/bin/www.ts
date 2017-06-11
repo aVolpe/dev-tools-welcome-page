@@ -34,14 +34,14 @@ const db : any = DBMigrate.getInstance(true, dbOptions);
 
 console.info(`DB Env is ${dbOptions.env}`)
 
-db.up(() => {
+// db.up(() => {
 
     console.log("Finishing migrations");
 
     server.listen(port);
     server.on("error", onError);
     server.on("listening", onListening);
-});
+// });
 
 
 /**

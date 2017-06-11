@@ -1,5 +1,9 @@
 /* Replace with your SQL commands */
-drop table if exists link;
-drop table if exists user_project;
-drop table if exists project;
-drop table if exists "user";
+DROP TABLE IF EXISTS link;
+DROP TABLE IF EXISTS user_project;
+DROP TABLE IF EXISTS project;
+DROP TABLE IF EXISTS "user";
+
+DROP SEQUENCE IF EXISTS user_id_sequence;
+DROP SEQUENCE IF EXISTS link_id_sequence;
+DROP SEQUENCE IF EXISTS project_id_sequence;
