@@ -12,7 +12,7 @@ import {USERS_GET} from '../../store/user/user.actions';
 })
 export class UserListComponent implements OnInit {
 
-    users : Observable<IUser[]>;
+    finalUsers: IUser[];
 
     constructor(public store: Store<IAppState>) {}
 
@@ -20,9 +20,11 @@ export class UserListComponent implements OnInit {
 
         this.store.dispatch({
             type: USERS_GET
-        })
+        });
 
-        this.users = this.store.select("users");
+        this.store.select("users").subscribe((data : IUser[]) => {
+            this.finalUsers = data;
+        });
     }
 
 }
