@@ -3,20 +3,20 @@ import {Injectable} from '@angular/core';
 import {Action} from '@ngrx/store';
 import {Http, Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
-import {USER_GET, USER_GET_FAIL, USER_GET_SUCCESS} from './profile.actions';
+import {USERS_GET, USERS_GET_FAIL, USERS_GET_SUCCESS} from './user.actions';
 
 @Injectable()
-export class ProfileEffects {
+export class UserEffects {
 
     @Effect()
-    userGet$ = this.actions$
-        .ofType(USER_GET)
+    allUserGet$ = this.actions$
+        .ofType(USERS_GET)
         .switchMap((action: Action) => {
 
             return this.http.get('/api/user', action.payload)
                 .map((response: Response) => response.json())
-                .catch(() => Observable.of(({type: USER_GET_FAIL})))
-                .map((response) => ({type: USER_GET_SUCCESS, payload: response}));
+                .catch(() => Observable.of(({type: USERS_GET_FAIL})))
+                .map((response) => ({type: USERS_GET_SUCCESS, payload: response}));
 
         });
 

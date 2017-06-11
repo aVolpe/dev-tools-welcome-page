@@ -1,0 +1,13 @@
+<h2>Profile</h2>
+
+<a [routerLink]="[{outlets: { modal : 'edit'}}]" routerLinkActive="active">Edit</a>
+
+<ol>
+
+    <li>test</li>
+    <li *ngFor="let user of users | async">
+        {{ user | json }}
+    </li>
+    <li>test</li>
+</ol>
+

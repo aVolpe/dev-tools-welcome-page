@@ -7,54 +7,59 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { feedReducer, IFeed } from './feed/feed.reducer';
 import { profileReducer, IProfile } from './profile/profile.reducer';
+import { userReducer, IUser } from './user/user.reducer';
 import { ProfileEffects } from './profile/profile.effects';
 import { FeedEffects } from './feed/feed.effects';
 import { environment } from '../../environments/environment';
 import { IWeather, weatherReducer } from './weather/weather.reducer';
 import { WeatherEffects } from './weather/weather.effects';
+import { UserEffects } from './user/user.effects';
 import { CommonModule } from '@angular/common';
 
 // all new reducers should be define here
 export interface IAppState {
-  feed: IFeed[];
-  profile: IProfile;
-  weather: IWeather;
+    feed: IFeed[];
+    profile: IProfile;
+    weather: IWeather;
+    user: IUser;
 }
 
 // all new reducers should be define here
 const reducers = {
-  feed: feedReducer,
-  profile: profileReducer,
-  weather: weatherReducer
+    feed: feedReducer,
+    profile: profileReducer,
+    weather: weatherReducer,
+    users: userReducer
 };
 
 const productionReducer: ActionReducer<IAppState> = combineReducers(reducers);
 const developmentReducer: ActionReducer<IAppState> = compose(storeFreeze, combineReducers)(reducers);
 
 export function reducer(state: IAppState, action: Action) {
-  if (environment.production) {
-    return productionReducer(state, action);
-  } else {
-    return developmentReducer(state, action);
-  }
+    if (environment.production) {
+        return productionReducer(state, action);
+    } else {
+        return developmentReducer(state, action);
+    }
 }
 
 @NgModule()
 export class DummyModule {
 
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: CommonModule
-    };
-  }
+    static forRoot(): ModuleWithProviders {
+        return {
+            ngModule: CommonModule
+        };
+    }
 }
 
 export const store: ModuleWithProviders = StoreModule.provideStore(reducer);
 export const instrumentation: ModuleWithProviders =
-  (!environment.production) ? StoreDevtoolsModule.instrumentOnlyWithExtension() : DummyModule.forRoot();
+    (!environment.production) ? StoreDevtoolsModule.instrumentOnlyWithExtension() : DummyModule.forRoot();
 
 export const effects: ModuleWithProviders[] = [
-  EffectsModule.run(ProfileEffects),
-  EffectsModule.run(FeedEffects),
-  EffectsModule.run(WeatherEffects)
+    EffectsModule.run(ProfileEffects),
+    EffectsModule.run(FeedEffects),
+    EffectsModule.run(WeatherEffects),
+    EffectsModule.run(UserEffects)
 ];
