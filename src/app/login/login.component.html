@@ -1,0 +1,25 @@
+<form>
+    <div class="group">
+        <input [(ngModel)]="user.email"
+               name="user"
+               type="text"
+               [ngClass]="user.email? 'used' : ''">
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label>Email or username</label>
+    </div>
+    <div class="group">
+        <input [(ngModel)]="user.pass"
+               name="pass"
+               type="password"
+               [ngClass]="user.pass? 'used' : ''">
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label>Password</label>
+    </div>
+    <button type="button" class="button buttonBlue">Login
+        <div class="ripples buttonRipples" #ripples (click)="clickRipples($event)">
+            <span class="ripplesCircle" #ripplesCircle></span>
+        </div>
+    </button>
+</form>

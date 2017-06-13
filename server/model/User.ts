@@ -70,10 +70,44 @@ export class User {
             });
     }
 
+    public static login(user: string, pass: string): Promise<User> {
+        const errorMessage = {
+                        code : 404,
+                        message : "Wrong user/pass combination"
+                    };
+        if (!user || !pass)
+            return Promise.reject(errorMessage);
+
+        return db.conn.one('' +
+            ' SELECT ' +
+            '   * ' +
+            ' FROM "user"' +
+            ' WHERE email = ${email}' +
+            ' LIMIT 1', { email : user })
+            .then(data => {
+                console.log(data);
+                if (User.validate(data, pass)) {
+                    return User.filterProp(data);
+                }
+                throw errorMessage;
+            })
+            .catch(error => {
+                console.log(error);
+                if (error.message == "No data returned from the query.") {
+                    throw errorMessage;
+                }
+                throw error;
+            });
+    }
+
     private static filterProp(user: User) : User {
         user.password = undefined;
         user.salt = undefined;
         return user;
+    }
+    
+    public static validate(user: User, pass: string): boolean {
+        return bcrypt.compareSync(pass, user.password);
     }
 
     public static buildData(user: User): {salt: string, pass: string} {
