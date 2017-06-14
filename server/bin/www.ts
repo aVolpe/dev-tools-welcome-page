@@ -15,6 +15,7 @@ import * as DBMigrate from "db-migrate";
  */
 const port = normalizePort(process.env.PORT || serverPort);
 app.set("port", port);
+console.log(`Running on port ${port}`)
 
 /**
  * Create HTTP server.
@@ -27,22 +28,33 @@ const server = http.createServer(app);
 
 const dbOptions = {
     env: process.env.DB_ENV || 'dev',
-    config: 'server/database.json'
+    config: 'server/database.json',
+    migrate: false
 };
+dbOptions.migrate = process.env.DB_MIGRATE || dbOptions.env == 'dev';
 
 const db : any = DBMigrate.getInstance(true, dbOptions);
 
 console.info(`DB Env is ${dbOptions.env}`)
 
-// db.up(() => {
-
+if (dbOptions.migrate) {
+  console.log('Migrating');
+  db.up(() => {
     console.log("Finishing migrations");
+    startServer();
+  });
+} else {
+  startServer();
+}
 
-    server.listen(port);
-    server.on("error", onError);
-    server.on("listening", onListening);
-// });
-
+/**
+ * Starts the server
+ */
+function startServer() {
+  server.listen(port);
+  server.on("error", onError);
+  server.on("listening", onListening);
+}
 
 /**
  * Normalize a port into a number, string, or false.

@@ -14,15 +14,15 @@
     "e2e:client": "ng e2e",
     "build": "ng build --prod --sm=false --aot=true --output-path=dist/client && npm run _server:build",
     "_server:run": "tsc -p ./server && concurrently \"tsc -w -p ./server\" \"nodemon dist/server/bin/www.js\" ",
-    "_server:build": "tsc -p ./server",
+    "_server:build": "tsc -p ./server && cp ./server/database.json dist/server",
     "postinstall": "",
     "db-migrate": "db-migrate up --config server/database.json",
     "db-revert": "db-migrate down --config server/database.json",
     "db-up": "docker-compose up -d db"
   },
-  "author": "Vlado Tešanović",
+  "author": "Arturo Volpe",
   "repository": {
-    "url": "https://github.com/vladotesanovic/angular2-express-starter"
+    "url": "https://github.com/aVolpe/dev-tools-welcome-page"
   },
   "private": true,
   "dependencies": {

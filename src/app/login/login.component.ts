@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import {AuthService} from './auth.service';
 import {NavigationExtras, Router} from '@angular/router';
 import {ToastyService} from 'ng2-toasty';
+import { environment } from '../../environments/environment';
 
 @Component({
     selector: 'app-login',
@@ -24,10 +25,17 @@ export class LoginComponent implements OnInit {
         private router: Router) {}
 
     ngOnInit() {
-        this.user = {
-            email: 'juan@gmamil.com',
-            pass: '134556666'
-        };
+        if (environment.production) {
+            this.user = {
+                email: '',
+                pass: ''
+            };
+        } else {
+            this.user = {
+                email: 'juan@gmamil.com',
+                pass: '134556666'
+            };
+        }
     }
 
     clickRipples(event) {
