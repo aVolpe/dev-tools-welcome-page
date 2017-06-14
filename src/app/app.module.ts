@@ -12,6 +12,8 @@ import {LoginModule} from './login/login.module';
 import {LayoutComponent} from './layout/layout.component';
 import {AuthGuard} from './login/auth-guard.service';
 import {AuthService} from './login/auth.service';
+import {SidebarModule} from 'ng-sidebar';
+import {ToastyModule} from 'ng2-toasty';
 
 @NgModule({
     declarations: [
@@ -20,6 +22,8 @@ import {AuthService} from './login/auth.service';
     ],
     imports: [
         BrowserModule,
+        SidebarModule.forRoot(),
+        ToastyModule.forRoot(),
         SharedModule,
         FormsModule,
         HttpModule,
@@ -36,6 +40,9 @@ import {AuthService} from './login/auth.service';
     ],
     bootstrap: [
         AppComponent
+    ],
+    exports: [
+        ToastyModule
     ]
 })
 export class AppModule {

@@ -85,14 +85,12 @@ export class User {
             ' WHERE email = ${email}' +
             ' LIMIT 1', { email : user })
             .then(data => {
-                console.log(data);
                 if (User.validate(data, pass)) {
                     return User.filterProp(data);
                 }
                 throw errorMessage;
             })
             .catch(error => {
-                console.log(error);
                 if (error.message == "No data returned from the query.") {
                     throw errorMessage;
                 }
@@ -105,7 +103,7 @@ export class User {
         user.salt = undefined;
         return user;
     }
-    
+
     public static validate(user: User, pass: string): boolean {
         return bcrypt.compareSync(pass, user.password);
     }

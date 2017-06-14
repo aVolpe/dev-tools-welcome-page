@@ -1,10 +1,29 @@
-<app-ui-top-navigation></app-ui-top-navigation>
+<!-- Container for sidebar(s) + page content -->
+<ng-sidebar-container [animate]="true">
+    <!-- A sidebar -->
+    <ng-sidebar [(opened)]="opened"
+                [mode]="'push'"
+                [autoCollapseHeight]="500"
+                [autoCollapseWidth]="500"
+                [closeOnClickOutside]="false" >
+        <p>Sidebar contents super</p>
+        <!-- Page content -->
+        <button (click)="toggleSidebar()">Toggle sidebar</button>
+    </ng-sidebar>
 
-<app-ui-sub-navigation [title]="(observable$ | async)?.title" [description]="(observable$ | async)?.text"></app-ui-sub-navigation>
 
-<div class="main">
-  <router-outlet></router-outlet>
-</div>
+    <!-- Page content -->
+    <button (click)="toggleSidebar()">Toggle sidebar</button>
+
+    <!--<app-ui-top-navigation></app-ui-top-navigation>-->
+
+    <!--<app-ui-sub-navigation [title]="(observable$ | async)?.title" [description]="(observable$ | async)?.text"></app-ui-sub-navigation>-->
+
+    <div class="main">
+        <router-outlet></router-outlet>
+    </div>
+
+</ng-sidebar-container>
+
 
 <router-outlet name='modal'></router-outlet>
-

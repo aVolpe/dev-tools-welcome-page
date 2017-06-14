@@ -64,6 +64,7 @@
     "font-awesome": "^4.7.0",
     "global": "^4.3.2",
     "jsonwebtoken": "^7.3.0",
+    "ng2-toasty": "^4.0.3",
     "ngrx-store-freeze": "^0.1.9",
     "normalize.css": "^5.0.0",
     "path": "^0.12.7",

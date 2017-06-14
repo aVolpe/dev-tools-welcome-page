@@ -8,6 +8,7 @@ import 'rxjs/add/operator/map';
 import { Store } from '@ngrx/store';
 import { IAppState } from './store/index';
 import { USER_GET } from './store/profile/profile.actions';
+import {ToastyService, ToastyConfig, ToastOptions, ToastData} from 'ng2-toasty';
 
 @Component({
   selector: 'app-root',
@@ -16,15 +17,11 @@ import { USER_GET } from './store/profile/profile.actions';
 })
 export class AppComponent {
 
-  observable$: Observable<{}>;
-
-  constructor(http: Http, store: Store<IAppState>) {
-    this.observable$ = http
-      .get('/api/public/simple')
-      .map((response: Response) => response.json());
-
-    store.dispatch({
-      type: USER_GET
-    });
+  constructor(private toastyConfig: ToastyConfig) {
+    this.toastyConfig.theme = 'material';
+    this.toastyConfig.position = 'top-center';
+    this.toastyConfig.limit = 3;
+    this.toastyConfig.timeout = 5000;
   }
+
 }

@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import {AuthService} from './auth.service';
 import {NavigationExtras, Router} from '@angular/router';
+import {ToastyService} from 'ng2-toasty';
 
 @Component({
     selector: 'app-login',
@@ -17,7 +18,10 @@ export class LoginComponent implements OnInit {
     @ViewChild('ripplesCircle')
     ripplesCircle : ElementRef;
 
-    constructor(private authService : AuthService, private router: Router) {}
+    constructor(
+        private authService: AuthService,
+        private toastyService:ToastyService,
+        private router: Router) {}
 
     ngOnInit() {
         this.user = {
@@ -29,9 +33,14 @@ export class LoginComponent implements OnInit {
     clickRipples(event) {
 
         this.addEffect(event);
+        this.toastyService.clearAll();
 
         this.authService.login(this.user.email, this.user.pass).subscribe(data => {
-            console.log(data);
+
+            this.toastyService.success({
+                msg: "Login",
+                title: `Welcome ${data.name}`
+            });
 
             let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/dashboard';
 
@@ -44,6 +53,12 @@ export class LoginComponent implements OnInit {
 
             // Redirect the user
             this.router.navigate([redirect], navigationExtras);
+        }, error => {
+            console.log(error);
+            this.toastyService.error({
+                msg: "Login",
+                title: `Wrong user/password combination`
+            });
         });
     }
 
