@@ -1,5 +1,5 @@
 <!-- Container for sidebar(s) + page content -->
-<ng-sidebar-container [animate]="true">
+<ng-sidebar-container [animate]="true" class="ng-sidebar">
     <!-- A sidebar -->
     <ng-sidebar [(opened)]="opened"
                 [mode]="'push'"
@@ -11,6 +11,7 @@
         <button (click)="toggleSidebar()">Toggle sidebar</button>
     </ng-sidebar>
 
+    <app-ui-top-navigation></app-ui-top-navigation>
 
     <!-- Page content -->
     <button (click)="toggleSidebar()">Toggle sidebar</button>

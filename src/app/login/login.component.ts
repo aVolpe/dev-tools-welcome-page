@@ -55,6 +55,7 @@ export class LoginComponent implements OnInit {
             this.router.navigate([redirect], navigationExtras);
         }, error => {
             console.log(error);
+            this.user.pass = '';
             this.toastyService.error({
                 msg: "Login",
                 title: `Wrong user/password combination`
