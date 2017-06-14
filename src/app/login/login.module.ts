@@ -19,10 +19,7 @@ import {HttpModule} from '@angular/http';
         routing
     ],
     declarations: [LoginComponent],
-    providers: [
-        AuthGuard,
-        AuthService
-    ]
+    providers: []
 })
 export class LoginModule {
 }

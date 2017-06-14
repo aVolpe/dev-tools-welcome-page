@@ -11,6 +11,7 @@ export class AuthService {
     jwt: any;
 
     constructor(private htttp: Http) {
+        console.log('Creando mambo');
     }
 
     isLogged() {
