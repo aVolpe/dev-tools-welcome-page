@@ -8,6 +8,7 @@ export class AuthService {
 
     redirectUrl: string;
     user: IUser;
+    jwt: any;
 
     constructor(private htttp: Http) {
     }
@@ -19,10 +20,13 @@ export class AuthService {
     login(user: string, pass: string): Observable<IUser> {
 
         return this.htttp.post('/api/login', {
-            user : user,
-            pass : pass
+            email : user,
+            password : pass
         }).map(res => {
-            return res.json();
+            const userWithToken = res.json();
+            this.jwt = userWithToken.jwt;
+            this.user = userWithToken.user;
+            return this.user;
         });
     }
 }

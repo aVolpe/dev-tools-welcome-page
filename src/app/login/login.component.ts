@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import {AuthService} from './auth.service';
+import {NavigationExtras, Router} from '@angular/router';
 
 @Component({
     selector: 'app-login',
@@ -16,16 +17,37 @@ export class LoginComponent implements OnInit {
     @ViewChild('ripplesCircle')
     ripplesCircle : ElementRef;
 
-    constructor(private authService : AuthService) {}
+    constructor(private authService : AuthService, private router: Router) {}
 
     ngOnInit() {
         this.user = {
-            email: '',
-            pass: ''
+            email: 'juan@gmamil.com',
+            pass: '134556666'
         };
     }
 
     clickRipples(event) {
+
+        this.addEffect(event);
+
+        this.authService.login(this.user.email, this.user.pass).subscribe(data => {
+            console.log(data);
+
+            let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/dashboard';
+
+            // Set our navigation extras object
+            // that passes on our global query params and fragment
+            let navigationExtras: NavigationExtras = {
+                queryParamsHandling: 'preserve',
+                preserveFragment: true
+            };
+
+            // Redirect the user
+            this.router.navigate([redirect], navigationExtras);
+        });
+    }
+
+    private addEffect(event) {
 
         const parent = this.ripples.nativeElement.parentElement;
 
@@ -48,10 +70,5 @@ export class LoginComponent implements OnInit {
         this.ripples.nativeElement.addEventListener('oanimationend', removeIsActive, false);
         this.ripples.nativeElement.addEventListener('mozAnimationEnd ', removeIsActive, false);
         this.ripples.nativeElement.addEventListener('MSAnimationEnd ', removeIsActive, false);
-
-        this.authService.login(this.user.email, this.user.pass).subscribe(data => {
-            console.log(data);
-        });
     }
-
 }
