@@ -30,4 +30,9 @@ export class AuthService {
             return this.user;
         });
     }
+
+    logout() {
+        this.user = null;
+        this.jwt = null;
+    }
 }

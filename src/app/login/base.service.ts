@@ -4,10 +4,16 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Headers, Http, RequestOptions, Response, URLSearchParams } from '@angular/http';
 import {AuthService} from './auth.service';
+import {Router} from '@angular/router';
+import {ToastyService} from 'ng2-toasty';
 
 @Injectable()
 export class HttpHelper {
-    constructor(private http: Http, private service: AuthService) { }
+    constructor(
+        private http: Http,
+        private service: AuthService,
+        private router: Router,
+        private toastyService: ToastyService) { }
 
     _buildOptions(queryParams: any): RequestOptions {
 
@@ -43,6 +49,24 @@ export class HttpHelper {
         });
     }
 
+    _handle403(ob: Observable<Response>): Observable<Response>{
+
+        ob.subscribe(null, error => {
+            if (!error.ok) {
+                if (error.status === 403) {
+                    this.router.navigate(['/login']);
+                    this.service.logout();
+                    this.toastyService.error({
+                        title: 'Authorization',
+                        msg: 'You are not authorized to view this page, please log in with the correct credentials'
+                    })
+                }
+            }
+        }, null)
+
+        return ob;
+    }
+
     post(url: string, body: any, queryParams: any = null): Observable<Response> {
 
         return this.http.post(url, body, this._buildOptions(queryParams));
@@ -50,7 +74,7 @@ export class HttpHelper {
 
     get(url: string, queryParams: any = {}): Observable<Response> {
 
-        return this.http.get(url, this._buildOptions(queryParams));
+        return this._handle403(this.http.get(url, this._buildOptions(queryParams)));
     }
 
     put(url: string, body: any, queryParams: any): Observable<Response> {
