@@ -4,6 +4,7 @@ import {Action} from '@ngrx/store';
 import {Http, Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {USER_GET, USER_GET_FAIL, USER_GET_SUCCESS} from './profile.actions';
+import {HttpHelper} from '../../login/base.service';
 
 @Injectable()
 export class ProfileEffects {
@@ -20,6 +21,6 @@ export class ProfileEffects {
 
         });
 
-    constructor(private actions$: Actions, private http: Http) {
+    constructor(private actions$: Actions, private http: HttpHelper) {
     }
 }

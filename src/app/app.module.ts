@@ -14,6 +14,7 @@ import {AuthGuard} from './login/auth-guard.service';
 import {AuthService} from './login/auth.service';
 import {SidebarModule} from 'ng-sidebar';
 import {ToastyModule} from 'ng2-toasty';
+import {HttpHelper} from './login/base.service';
 
 @NgModule({
     declarations: [
@@ -36,7 +37,8 @@ import {ToastyModule} from 'ng2-toasty';
     providers: [
         WeatherService,
         AuthGuard,
-        AuthService
+        AuthService,
+        HttpHelper
     ],
     bootstrap: [
         AppComponent

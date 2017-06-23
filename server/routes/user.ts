@@ -1,13 +1,14 @@
 import {Request, Response} from 'express';
 import {User} from '../model/User';
 import {plainToClass} from 'class-transformer';
-import {buildSecureRouter} from '../auth_filter';
+import {AuthorizedRequest, buildSecureRouter} from '../auth_filter';
 
 const userRouter = buildSecureRouter();
 
 
-userRouter.get("/", (request: Request, response: Response) => {
+userRouter.get("/", (request: AuthorizedRequest, response: Response) => {
 
+    console.log(request.user);
     User.getAll().then(list => {
        response.json(list);
     }).catch(errors => {

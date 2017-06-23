@@ -75,7 +75,6 @@ export class LoginComponent implements OnInit {
 
         const parent = this.ripples.nativeElement.parentElement;
 
-        console.log(event);
         const x = event.pageX - parent.offsetLeft;
         const y = event.pageY - parent.offsetTop;
 

@@ -24,7 +24,6 @@ export class AuthService {
             email : user,
             password : pass
         }).map(res => {
-            console.log(res);
             const userWithToken = res.json();
             this.jwt = userWithToken.jwt;
             this.user = userWithToken.user;

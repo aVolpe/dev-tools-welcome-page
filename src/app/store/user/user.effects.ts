@@ -4,6 +4,7 @@ import {Action} from '@ngrx/store';
 import {Http, Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {USERS_GET, USERS_GET_FAIL, USERS_GET_SUCCESS} from './user.actions';
+import {HttpHelper} from '../../login/base.service';
 
 @Injectable()
 export class UserEffects {
@@ -12,6 +13,7 @@ export class UserEffects {
     allUserGet$ = this.actions$
         .ofType(USERS_GET)
         .switchMap((action: Action) => {
+            console.log('invocando usuarios');
 
             return this.http.get('/api/user', action.payload)
                 .map((response: Response) => response.json())
@@ -20,6 +22,6 @@ export class UserEffects {
 
         });
 
-    constructor(private actions$: Actions, private http: Http) {
+    constructor(private actions$: Actions, private http: HttpHelper) {
     }
 }

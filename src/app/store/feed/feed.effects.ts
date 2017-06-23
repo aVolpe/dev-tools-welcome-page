@@ -19,6 +19,7 @@ export class FeedEffects {
   addFeed$ = this.actions$
     .ofType(FEED_ADD)
     .switchMap((action: Action) => {
+      console.log('wut');
 
       return this.http.post('/api/feed', action.payload)
         .map((response: Response) => response.json())
@@ -31,6 +32,7 @@ export class FeedEffects {
   addFeedComment$ = this.actions$
     .ofType(FEED_ADD_COMMENT)
     .switchMap((action: Action) => {
+        console.log('wut');
 
       return this.http.post('/api/feed/' + action.payload.id + '/comment', action.payload.comment)
         .map((response: Response) => response.json())
@@ -43,6 +45,7 @@ export class FeedEffects {
   removeFeed$ = this.actions$
     .ofType(FEED_REMOVE)
     .switchMap((action: Action) => {
+        console.log('wut');
 
       return this.http.delete('/api/feed/' + action.payload)
         .map((response: Response) => response.json())
