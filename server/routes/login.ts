@@ -1,10 +1,9 @@
-import {pbkdf2, randomBytes} from 'crypto';
 import {NextFunction, Request, Response, Router} from 'express';
 import {sign} from 'jsonwebtoken';
-import {digest, length, secret} from '../config';
+import {secret} from '../config';
 import {User} from '../model/User';
 
-const loginRouter: Router = Router();
+const loginRouter = Router();
 
 // login method
 loginRouter.post("/", (request: Request, response: Response, next: NextFunction) => {

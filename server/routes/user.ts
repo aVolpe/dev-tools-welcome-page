@@ -1,9 +1,9 @@
-import { Request, Response, Router } from "express";
-import { db } from "../db";
+import {Request, Response} from 'express';
 import {User} from '../model/User';
 import {plainToClass} from 'class-transformer';
+import {buildSecureRouter} from '../auth_filter';
 
-const userRouter: Router = Router();
+const userRouter = buildSecureRouter();
 
 
 userRouter.get("/", (request: Request, response: Response) => {

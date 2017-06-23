@@ -1,7 +1,8 @@
-import { Request, Response, Router } from "express";
-import * as uuid from "uuid";
+import {Request, Response} from 'express';
+import * as uuid from 'uuid';
+import {buildSecureRouter} from '../auth_filter';
 
-const feedRouter: Router = Router();
+const feedRouter = buildSecureRouter();
 
 feedRouter.post("/", (request: Request, response: Response) => {
 

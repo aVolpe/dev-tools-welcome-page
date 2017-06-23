@@ -13,9 +13,10 @@
     "test:client": "ng test",
     "e2e:client": "ng e2e",
     "build": "ng build --prod --sm=false --aot=true --output-path=dist/client && npm run _server:build",
-    "_server:run": "tsc -p ./server && concurrently \"tsc -w -p ./server\" \"nodemon dist/server/bin/www.js\" ",
-    "_server:build": "tsc -p ./server && cp ./server/database.json dist/server",
+    "_server:run": "tsc -p ./server && npm run _db-copy && concurrently \"tsc -w -p ./server\" \"nodemon dist/server/bin/www.js\" ",
+    "_server:build": "tsc -p ./server && npm run _db-copy",
     "postinstall": "",
+    "_db-copy": "cp ./server/database.json dist/server",
     "db-migrate": "db-migrate up --config server/database.json",
     "db-revert": "db-migrate down --config server/database.json",
     "db-up": "docker-compose up -d db"
