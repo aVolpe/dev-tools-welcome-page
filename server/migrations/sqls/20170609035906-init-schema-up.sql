@@ -6,7 +6,6 @@ CREATE TABLE "user"
   email text NOT NULL,
   name text NOT NULL,
   password text NOT NULL,
-  salt text NOT NULL,
   CONSTRAINT user_pkey PRIMARY KEY (id),
   CONSTRAINT user_unique_email UNIQUE(email)
 

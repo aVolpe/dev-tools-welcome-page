@@ -17,9 +17,6 @@ export class User {
     @Length(6)
     public password: string;
 
-    public salt: string;
-
-
     constructor() {
     }
 
@@ -45,13 +42,12 @@ export class User {
 
                 const cryptData = User.buildData(this);
                 user.password = cryptData.pass;
-                user.salt = cryptData.salt;
                 return user;
             }).then(user => {
 
                 return db.conn.none('' +
-                    'INSERT INTO "user"(name, email, password, salt) ' +
-                    'VALUES(${name}, ${email}, ${password}, ${salt})', user)
+                    'INSERT INTO "user"(name, email, password) ' +
+                    'VALUES(${name}, ${email}, ${password})', user)
                     .then(() => {
                         return User.filterProp(user);
                     })
@@ -82,7 +78,7 @@ export class User {
             ' SELECT ' +
             '   * ' +
             ' FROM "user"' +
-            ' WHERE email = ${email}' +
+            ' WHERE email = ${email} OR name = ${email}' +
             ' LIMIT 1', { email : user })
             .then(data => {
                 if (User.validate(data, pass)) {
@@ -100,7 +96,6 @@ export class User {
 
     private static filterProp(user: User) : User {
         user.password = undefined;
-        user.salt = undefined;
         return user;
     }
 

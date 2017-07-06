@@ -1,14 +1,12 @@
 import {Request, Response} from 'express';
 import {User} from '../model/User';
 import {plainToClass} from 'class-transformer';
-import {AuthorizedRequest, buildSecureRouter} from '../auth_filter';
+import {buildSecureRouter} from '../auth_filter';
 
 const userRouter = buildSecureRouter();
 
 
-userRouter.get("/", (request: AuthorizedRequest, response: Response) => {
-
-    console.log(request.user);
+userRouter.get("/", (request: Request, response: Response) => {
     User.getAll().then(list => {
        response.json(list);
     }).catch(errors => {
@@ -18,7 +16,7 @@ userRouter.get("/", (request: AuthorizedRequest, response: Response) => {
 
 userRouter.post("/", (request, response) => {
 
-    const user = plainToClass(User, request.body as Object) as User;
+    const user = plainToClass(User, request.body as Object);
     user.add().then(user => {
         response.json(user);
     }).catch(errors => {
