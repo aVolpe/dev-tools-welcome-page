@@ -5,7 +5,7 @@ import {plainToClass} from 'class-transformer';
 
 export class User {
 
-    public id: string;
+    public id: number;
 
     @IsNotEmpty()
     public name: string;
