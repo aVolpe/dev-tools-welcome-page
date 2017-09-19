@@ -1,0 +1,32 @@
+<div>
+    <div class="hgroup">
+        <h1>Developer Portal</h1>
+        <h3></h3>
+    </div>
+    <form>
+        <div class="group">
+            <input name="user" type="text" v-model="user" v-bind:class="{ used: user }">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Email or username</label>
+        </div>
+        <div class="group">
+            <input name="pass" type="password" v-model="pass">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Password</label>
+        </div>
+        <button type="button" class="button buttonBlue" v-on:click="login()">
+            Login
+            <div class="ripples buttonRipples" >
+                <span class="ripplesCircle"></span>
+            </div>
+        </button>
+    </form>
+    <footer>
+        <small>If you forgot your password, please contact with the admin</small>
+        <br />
+
+        <small>Made by Arturo Volpe. 2017</small>
+    </footer>
+    </div>

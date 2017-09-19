@@ -17,10 +17,11 @@ export class UserProject {
     ) {}
 
     public add(): Promise<UserProject> {
-        return db.conn.none('' +
-            'INSERT INTO user_project (user_id, project_id, role)' +
-            'VALUES(${user_id}, ${project_id}, ${role})', this)
-            .then(() => return this);
+        return null;
+        // return db.conn.none('' +
+        //     'INSERT INTO user_project (user_id, project_id, role)' +
+        //     'VALUES(${user_id}, ${project_id}, ${role})', this)
+        //     .then(() => return this);
     }
 }
 

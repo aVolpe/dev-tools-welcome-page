@@ -14,7 +14,7 @@ loginRouter.post("/", (request: Request, response: Response, next: NextFunction)
             response.json({ jwt: token, user: user });
         })
         .catch(error => {
-            response.status(501);
+            response.status(401);
             response.json(error);
         })
 });
