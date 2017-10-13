@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VueResource from 'vue-resource';
-import Login from './auth/login/login.vue';
 import config from './config'
 
 Vue.use(VueRouter);
@@ -10,8 +9,8 @@ Vue.use(VueResource);
 
 // 1. Define route components.
 // These can be imported from other files
-const Foo = { template: '<div>foo</div>' }
-const Bar = { template: '<div>bar</div>' }
+import Login from './auth/login/login.vue';
+import Dashboard from './dashboard/dashboard.vue'
 
 // 2. Define some routes
 // Each route should map to a component. The "component" can
@@ -19,8 +18,8 @@ const Bar = { template: '<div>bar</div>' }
 // `Vue.extend()`, or just a component options object.
 // We'll talk about nested routes later.
 const routes = [
-  { path: '/login', component: Login },
-  { path: '/bar', component: Bar }
+  { path: '/', alias: '/login', component: Login },
+  { path: '/dashboard', component: Dashboard }
 ]
 
 // 3. Create the router instance and pass the `routes` option
