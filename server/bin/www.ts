@@ -28,7 +28,7 @@ const server = http.createServer(app);
 
 const dbOptions = {
     env: process.env.DB_ENV || 'dev',
-    config: 'server/database.json',
+    config: 'database.json',
     migrate: false
 };
 dbOptions.migrate = process.env.DB_MIGRATE || dbOptions.env == 'dev';
