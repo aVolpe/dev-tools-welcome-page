@@ -20,7 +20,7 @@ export default {
             })
         },
         goDashboard: function() {
-            this.$router.push('/dashboard');
+            this.$router.push('/');
         }
 
     }
