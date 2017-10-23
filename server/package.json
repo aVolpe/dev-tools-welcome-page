@@ -5,7 +5,8 @@
   "main": "app.js",
   "license": "MIT",
   "scripts": {
-    "start": "tsc -p . && npm run _db-copy && concurrently \"tsc -w -p .\" \"nodemon dist/bin/www.js\" ",
+    "start": "npm run db-up && npm run start-dev",
+    "start-dev": "tsc -p . && npm run _db-copy && concurrently \"tsc -w -p .\" \"nodemon dist/bin/www.js\" ",
     "lint": "tslint './**/*.ts' -c tslint.json --fix",
     "build": "tsc -p . && npm run _db-copy",
     "_db-copy": "cp ./database.json dist/",
