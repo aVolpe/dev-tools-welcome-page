@@ -9,6 +9,7 @@ Vue.use(VueResource);
 
 // 1. Define route components.
 // These can be imported from other files
+import App from './app.vue';
 import Login from './auth/login/login.vue';
 import Template from './template.vue'
 
@@ -42,10 +43,12 @@ const router = new VueRouter({
 // 4. Create and mount the root instance.
 // Make sure to inject the router with the router option to make the
 // whole app router-aware.
-console.log("empezando");
 const app = new Vue({
-  router
-}).$mount('#app')
+  ...App, // ES7 Object rest spread operator (or Object.assign)
+   router
+})
+
+app.$mount('#app')
 
 // Now the app has started!
 

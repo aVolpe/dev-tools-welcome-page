@@ -12,7 +12,7 @@
     "vue-router": "^2.7.0"
   },
   "scripts": {
-    "dev": "poi --templateCompiler --proxy http://localhost:4300",
-    "build": "poi build src/index.js --templateCompiler"
+    "dev": "poi  --proxy http://localhost:4300",
+    "build": "poi build src/index.js "
   }
 }
